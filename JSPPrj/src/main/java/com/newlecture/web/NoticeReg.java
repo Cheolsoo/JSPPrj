@@ -18,8 +18,12 @@ public class NoticeReg extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		// 요렇게 해야하지만 전송받는 값들의 인코딩 처리를 UTF-8 로 합니다. 
-		request.setCharacterEncoding("UTF-8");
+		// 2022.10.01 19:42
+		// 요렇게 해야하지만 전송받는 값들의 인코딩 처리를 UTF-8 로 합니다.
+		
+		// 2022.10.01 19:43
+		// 서블릿필터 사용으로 아래 라인 주석 처리
+		// request.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
 
