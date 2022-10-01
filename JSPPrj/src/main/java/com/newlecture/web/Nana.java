@@ -20,10 +20,10 @@ public class Nana extends HttpServlet {
 		
 		PrintWriter out = response.getWriter();
 
-		String temp = request.getParameter("cnt");
+		String cnt_ = request.getParameter("cnt");
 		int cnt = 10;
-		if ( temp != null && !temp.equals(""))
-			cnt = Integer.parseInt(temp);
+		if ( cnt_ != null && !cnt_.equals(""))
+			cnt = Integer.parseInt(cnt_);
 		
 		for(int i=0; i<cnt; i++)
 		{
