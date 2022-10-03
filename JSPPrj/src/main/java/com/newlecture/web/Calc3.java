@@ -58,14 +58,25 @@ public class Calc3 extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// 입력된 문자열이 C 경우, 쿠키 삭제 
+		// (삭제라기보다는 공백 문자를 쿠키에 저장하는 것으로 이해됨)
+		else if (operator != null && operator.equals("C")) {
+			exp = "";
+			
+		}
 		// 입력된 문자열이 = 문자가 아닌 경우 쿠키에 계속 저장
 		else {
 			exp += (value == null)?"":value;
 			exp += (operator == null)?"":operator;
 			exp += (dot == null)?"":dot;
 		}
+		
 		Cookie expCookie = new Cookie("exp", exp);
 		
+		// 입력된 값이 문자 C 인 경우에만 쿠키 해제
+		if (operator != null && operator.equals("C")) {
+			expCookie.setMaxAge(0);
+		}
 		response.addCookie(expCookie);
 		response.sendRedirect("calcpage");
 		
