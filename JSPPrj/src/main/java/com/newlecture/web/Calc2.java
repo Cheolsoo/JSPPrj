@@ -1,3 +1,9 @@
+// 2022.10.03 16:39
+// 쿠키 maxAge 설정
+//
+// 2022.10.03 16:28
+// 30 - cookie path 예제, 현재 버전은 버그가 있음
+
 package com.newlecture.web;
 
 import java.io.IOException;
@@ -98,8 +104,12 @@ public class Calc2 extends HttpServlet {
 			Cookie opCookie = new Cookie("op", op);
 			
 			// 쿠키에 url path 지정하기
-			valueCookie.setPath("/Calc2");
-			opCookie.setPath("/Calc2");
+			valueCookie.setPath("/calc2");
+			
+			// 24시간동안 쿠키 유지
+			valueCookie.setMaxAge(24*60*60);
+			
+			opCookie.setPath("/calc2");
 			
 			response.addCookie(valueCookie);
 			response.addCookie(opCookie);
