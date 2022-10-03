@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +23,9 @@ public class Calc2 extends HttpServlet {
 		ServletContext application = request.getServletContext();
 		HttpSession session = request.getSession();
 		
+		// 쿠키 읽기
+		Cookie[] cookies = request.getCookies();
+		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
@@ -37,13 +41,37 @@ public class Calc2 extends HttpServlet {
 			
 			// 앞에서 저장된 값
 			//int x = (Integer)application.getAttribute("value"); 
-			int x = (Integer)session.getAttribute("value");
+			
+			// 세션에서 구하기
+			//int x = (Integer)session.getAttribute("value");
+			
+			// 이제는 쿠키에서 구하기
+			int x = 0;
+			
+			for(Cookie c : cookies) {
+				if (c.getName().equals("value")) {
+					x = Integer.parseInt(c.getValue());
+					break;
+				}
+			}
 					
 			// 사용자가 지금 전달한 값
 			int y = v;
 			
 			//String operator = (String)application.getAttribute("op");
-			String operator = (String)session.getAttribute("op");
+			
+			// 세션 이용해서 연산자 구하기
+			//String operator = (String)session.getAttribute("op");
+			
+			// 쿠키 이용해서 연산자 구하기
+			String operator = "";
+			for(Cookie c : cookies) {
+				if (c.getName().equals("op")) {
+					operator = c.getValue();
+					break;
+				}
+			}
+			
 			
 			int result = 0;
 			
@@ -59,8 +87,18 @@ public class Calc2 extends HttpServlet {
 			//application.setAttribute("value", v);
 			//application.setAttribute("op", op);
 
-			session.setAttribute("value", v);
-			session.setAttribute("op", op);
+			//세션 사용 예제 '22.10.03
+			//session.setAttribute("value", v);
+			//session.setAttribute("op", op);
+			
+			// 쿠키 사용 예제 '22.10.03 14:44
+			// 쿠키값으로 사용할 수 있는 값은 URL 인코딩된 문자열만 사용 가능
+			// 그래서 문자열변환 사용함 : String.valueOf("문자열");
+			Cookie valueCookie = new Cookie("value", String.valueOf(v));
+			Cookie opCookie = new Cookie("op", op);
+			
+			response.addCookie(valueCookie);
+			response.addCookie(opCookie);
 		}
 		
 	}
