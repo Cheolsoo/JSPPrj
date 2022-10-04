@@ -77,6 +77,9 @@ public class Calc3 extends HttpServlet {
 		if (operator != null && operator.equals("C")) {
 			expCookie.setMaxAge(0);
 		}
+		
+		// 다중 경로는 안됨, 안타깝지만 path는 하나만 등록 가능
+		expCookie.setPath("/");
 		response.addCookie(expCookie);
 		response.sendRedirect("calcpage");
 		
