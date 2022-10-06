@@ -1,0 +1,54 @@
+create tablespace newlec datafile 'c:\sw\app\VM1\oradata\ORCL\newlec.dbf' size 100m autoextend on next 10m;  
+create user newlec identified by today default tablespace newlec; 
+
+grant connect, resource, dba to newlec;
+
+
+CREATE TABLE NOTICE
+(
+	ID	NUMBER,
+	TITLE	NVARCHAR2(100),
+	WRITER_ID NVARCHAR2(50),
+	CONTENT CLOB,
+	REGDATE	TIMESTAMP,
+	HIT 	NUMBER,
+	FILES	NVARCHAR2(1000)
+);
+
+CREATE TABLE COMMENTS
+(
+	ID	NUMBER,
+	CONTENT	NVARCHAR2(2000),
+	REGDATE	TIMESTAMP,
+	WRITER_ID	NVARCHAR2(50),
+	NOTICE_ID	NUMBER
+);
+
+CREATE TABLE ROLE
+(
+	ID	VARCHAR2(50),
+	DISCRIPTION	NVARCHAR2(500),
+);
+
+CREATE TABLE MEMBER_ROLE
+(
+	MEMBER_ID	NVARCHAR2(50),
+	ROLE_ID		VARCHAR2(50)
+);
+
+CREATE TABLE MEMBER
+(
+	ID			NVARCHAR2(50)
+	, PWD		NVARCHAR2(50)
+	, NAME		NVARCHAR2(50)
+	, GENDER 	NCHAR(2)
+	, BIRTHDAY	CHAR(10)
+	, PHONE		CHAR(13)
+	, REGDATE	DATE
+	, EMAIL		NVARCHAR2(200)
+)
+	
+INSERT INTO NOTICE VALUES(1, 'JDBC란 무엇인가?', 'newlec', 'aaa', SYSDATE, 0, '');  
+INSERT INTO NOTICE VALUES(2, 'JDBC2란 무엇인가?', 'newlec', 'aaa', SYSDATE, 0, '');  
+INSERT INTO NOTICE VALUES(3, 'JDBC3란 무엇인가?', 'newlec', 'aaa', SYSDATE, 0, '');  
+	
