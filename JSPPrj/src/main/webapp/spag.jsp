@@ -9,11 +9,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%
+pageContext.setAttribute("result", "hello");
+%>
 <body>
 	<%=request.getAttribute("result") %>입니다.
-	${result}<br >
+	${requestScope.result}<br >
 	${names[0]}<br >
-	${names[1] }<br >
-	${notice.title }<br >
+	${names[1]}<br >
+	${notice.title}<br >
+	${result}<br>
+	${param.n}<br>
+	${header.accept}
 </body>
 </html>
