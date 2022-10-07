@@ -20,7 +20,7 @@ ResultSet rs = st.executeQuery(sql);
 <html>
 
 <head>
-    <title>코딩 전문가를 만들기 위한 온라인 강의 시스템</title>
+    <title>코딩 전문가를 만들기 위한 온라인 강의 시스템 - 테스트 할때는 list.jsp 페이지부터 실행</title>
     <meta charset="UTF-8">
     <title>공지사항목록</title>
     
