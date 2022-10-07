@@ -1,54 +1,67 @@
-create tablespace newlec datafile 'c:\sw\app\VM1\oradata\ORCL\newlec.dbf' size 100m autoextend on next 10m;  
+-- create tablespace newlec datafile 'c:\sw\app\VM1\oradata\ORCL\newlec.dbf' size 100m autoextend on next 10m;  
+
+create tablespace newlec datafile 'c:\app\cskim\product\21c\oradata\XE\newlec.dbf' size 100m autoextend on next 10m;  
+alter session set "_oracle_script"=true;
 create user newlec identified by today default tablespace newlec; 
 
 grant connect, resource, dba to newlec;
 
+-- 아래거는 안되네
+-- sqlplus newlec/today@localhost:1522/XEPDB1
+sqlplus newlec/today@localhost:1522/XE
 
 CREATE TABLE NOTICE
 (
-	ID	NUMBER,
-	TITLE	NVARCHAR2(100),
-	WRITER_ID NVARCHAR2(50),
-	CONTENT CLOB,
-	REGDATE	TIMESTAMP,
-	HIT 	NUMBER,
-	FILES	NVARCHAR2(1000)
+    ID         NUMBER,
+    TITLE      NVARCHAR2(100),
+    WRITER_ID  NVARCHAR2(50),
+    CONTENT    CLOB,
+    REGDATE    TIMESTAMP,
+    HIT        NUMBER,
+    FILES      NVARCHAR2(1000)
 );
 
 CREATE TABLE COMMENTS
 (
-	ID	NUMBER,
-	CONTENT	NVARCHAR2(2000),
-	REGDATE	TIMESTAMP,
-	WRITER_ID	NVARCHAR2(50),
-	NOTICE_ID	NUMBER
+    ID          NUMBER,
+    CONTENT     NVARCHAR2(2000),
+    REGDATE     TIMESTAMP,
+    WRITER_ID   NVARCHAR2(50),
+    NOTICE_ID   NUMBER
 );
 
 CREATE TABLE ROLE
 (
-	ID	VARCHAR2(50),
-	DISCRIPTION	NVARCHAR2(500),
+    ID  VARCHAR2(50),
+    DISCRIPTION NVARCHAR2(500),
 );
 
 CREATE TABLE MEMBER_ROLE
 (
-	MEMBER_ID	NVARCHAR2(50),
-	ROLE_ID		VARCHAR2(50)
+    MEMBER_ID   NVARCHAR2(50),
+    ROLE_ID     VARCHAR2(50)
 );
 
 CREATE TABLE MEMBER
 (
-	ID			NVARCHAR2(50)
-	, PWD		NVARCHAR2(50)
-	, NAME		NVARCHAR2(50)
-	, GENDER 	NCHAR(2)
-	, BIRTHDAY	CHAR(10)
-	, PHONE		CHAR(13)
-	, REGDATE	DATE
-	, EMAIL		NVARCHAR2(200)
-)
-	
+    ID          NVARCHAR2(50)
+    , PWD       NVARCHAR2(50)
+    , NAME      NVARCHAR2(50)
+    , GENDER    NCHAR(2)
+    , BIRTHDAY  CHAR(10)
+    , PHONE     CHAR(13)
+    , REGDATE   DATE
+    , EMAIL     NVARCHAR2(200)
+);
+    
 INSERT INTO NOTICE VALUES(1, 'JDBC란 무엇인가?', 'newlec', 'aaa', SYSDATE, 0, '');  
 INSERT INTO NOTICE VALUES(2, 'JDBC2란 무엇인가?', 'newlec', 'aaa', SYSDATE, 0, '');  
 INSERT INTO NOTICE VALUES(3, 'JDBC3란 무엇인가?', 'newlec', 'aaa', SYSDATE, 0, '');  
-	
+INSERT INTO NOTICE VALUES(4, 'JSP에서 JDBC 사용하기', 'dragon', 'aaa', SYSDATE, 9, '');
+INSERT INTO NOTICE VALUES(5, 'Service 계층 추가하기', 'good', 'aaa', SYSDATE, 23, '');
+INSERT INTO NOTICE VALUES(6, '전화번호로 연락주시기 바랍니다. 010-1234-5678', 'guest', 'aaa', SYSDATE, 23, '');
+INSERT INTO NOTICE VALUES(7, '선반-접시-그릇 이 세가지요~', 'okay', 'aaa', SYSDATE, 1, '');
+
+
+
+    
