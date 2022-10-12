@@ -23,7 +23,7 @@ public class NoticeDetailController extends HttpServlet {
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		String url = "jdbc:oracle:thin:@192.168.100.30:1521/orcl";
+		String url = "jdbc:oracle:thin:@localhost:1522/xe";
 		String sql = "SELECT * FROM NOTICE WHERE ID=?";
 
 		try {
