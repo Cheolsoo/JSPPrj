@@ -64,4 +64,24 @@ INSERT INTO NOTICE VALUES(7, '선반-접시-그릇 이 세가지요~', 'okay', '
 
 
 
+INSERT INTO NOTICE VALUES(8, '데이터베이스 서버가 고장났습니다.', 'newlec', '강의용 서버가 고장나서 모든 설치를 다시 해야만 합니다.', SYSDATE, 5, '');
+INSERT INTO NOTICE VALUES(9, '데이터도 손실 되었습니다.', 'newlec', '일단 가상컴퓨터 하나 띄워서 그 컴에 세팅을 다시 했습니다.', SYSDATE, 2, '');
+INSERT INTO NOTICE VALUES(10, '그럼 강의 업로드 못하는건가요?', 'newlec', '다행히 일부만 손실됨', SYSDATE, 0, '');
+INSERT INTO NOTICE VALUES(11, '예제 파일들을 살리고 있습니다.', 'dragon', '일부 손실된 파일들은 제 강의 보면서 복구하였습니다.', SYSDATE, 9, '');
+
+
+-- prev
+SELECT * FROM NOTICE 
+WHERE ID = (
+	SELECT ID FROM NOTICE WHERE REGDATE > (
+		SELECT REGDATE FROM NOTICE WHERE ID=3
+	) AND ROWNUM = 1
+);
+
+-- next
+SELECT ID FROM (SELECT * FROM NOTICE ORDER BY REGDATE DESC)
+WHERE REGDATE < (SELECT REGDATE FROM NOTICE WHERE ID=3)
+AND ROWNUM=1
+
+
     
