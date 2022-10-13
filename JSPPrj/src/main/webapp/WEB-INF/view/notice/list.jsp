@@ -9,7 +9,7 @@
 <html>
 
 <head>
-    <title>코딩 전문가를 만들기 위한 온라인 강의 시스템 - 테스트 할때는 list.jsp 페이지부터 실행</title>
+    <title>list.jsp</title>
     <meta charset="UTF-8">
     <title>공지사항목록</title>
     
@@ -154,11 +154,11 @@
 						<legend class="hidden">공지사항 검색 필드</legend>
 						<label class="hidden">검색분류</label>
 						<select name="f">
-							<option  value="title">제목</option>
-							<option  value="writerId">작성자</option>
+							<option ${(param.f == "title")?"selected":"" }selected value="title">제목</option>
+							<option ${(param.f == "writer_id")?"selected":"" } value="writer_id">작성자</option>
 						</select> 
 						<label class="hidden">검색어</label>
-						<input type="text" name="q" value=""/>
+						<input type="text" name="q" value="${param.q}"/>
 						<input class="btn btn-search" type="submit" value="검색" />
 					</fieldset>
 				</form>
