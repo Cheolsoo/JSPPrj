@@ -15,6 +15,21 @@ import com.newlecture.web.service.NoticeService;
 
 @WebServlet("/admin/notice/list")
 public class ListController extends HttpServlet {
+	// 404    url 없음
+	// 405    url 있지만 받는 메소드 없음
+	// 403    url 있고 받는 메소드 있지만 권한 없음
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String[] openIds = request.getParameterValues("open-id");
+		String[] delIds = request.getParameterValues("del-id");
+		
+		for(String openId : openIds)
+			System.out.printf("open id : %s\n",  openId);
+		
+		for(String delId : delIds)
+			System.out.printf("del id : %s\n",  delId);		
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
