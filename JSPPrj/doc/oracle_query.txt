@@ -69,6 +69,52 @@ INSERT INTO NOTICE VALUES(9, '데이터도 손실 되었습니다.', 'newlec', '
 INSERT INTO NOTICE VALUES(10, '그럼 강의 업로드 못하는건가요?', 'newlec', '다행히 일부만 손실됨', SYSDATE, 0, '');
 INSERT INTO NOTICE VALUES(11, '예제 파일들을 살리고 있습니다.', 'dragon', '일부 손실된 파일들은 제 강의 보면서 복구하였습니다.', SYSDATE, 9, '');
 
+INSERT INTO NOTICE VALUES (12,'title12','cskim','내용12',SYSDATE, 12, '');
+INSERT INTO NOTICE VALUES (13,'title13','cskim','내용13',SYSDATE, 13, '');
+INSERT INTO NOTICE VALUES (14,'title14','cskim','내용14',SYSDATE, 14, '');
+INSERT INTO NOTICE VALUES (15,'title15','cskim','내용15',SYSDATE, 15, '');
+INSERT INTO NOTICE VALUES (16,'title16','cskim','내용16',SYSDATE, 16, '');
+INSERT INTO NOTICE VALUES (17,'title17','cskim','내용17',SYSDATE, 17, '');
+INSERT INTO NOTICE VALUES (18,'title18','cskim','내용18',SYSDATE, 18, '');
+INSERT INTO NOTICE VALUES (19,'title19','cskim','내용19',SYSDATE, 19, '');
+INSERT INTO NOTICE VALUES (20,'title20','cskim','내용20',SYSDATE, 20, '');
+INSERT INTO NOTICE VALUES (21,'title21','cskim','내용21',SYSDATE, 21, '');
+INSERT INTO NOTICE VALUES (22,'title22','cskim','내용22',SYSDATE, 22, '');
+INSERT INTO NOTICE VALUES (23,'title23','cskim','내용23',SYSDATE, 23, '');
+INSERT INTO NOTICE VALUES (24,'title24','cskim','내용24',SYSDATE, 24, '');
+INSERT INTO NOTICE VALUES (25,'title25','cskim','내용25',SYSDATE, 25, '');
+INSERT INTO NOTICE VALUES (26,'title26','cskim','내용26',SYSDATE, 26, '');
+INSERT INTO NOTICE VALUES (27,'title27','cskim','내용27',SYSDATE, 27, '');
+INSERT INTO NOTICE VALUES (28,'title28','cskim','내용28',SYSDATE, 28, '');
+INSERT INTO NOTICE VALUES (29,'title29','cskim','내용29',SYSDATE, 29, '');
+INSERT INTO NOTICE VALUES (30,'title30','cskim','내용30',SYSDATE, 30, '');
+INSERT INTO NOTICE VALUES (31,'title31','cskim','내용31',SYSDATE, 31, '');
+INSERT INTO NOTICE VALUES (32,'title32','cskim','내용32',SYSDATE, 32, '');
+INSERT INTO NOTICE VALUES (33,'title33','cskim','내용33',SYSDATE, 33, '');
+INSERT INTO NOTICE VALUES (34,'title34','cskim','내용34',SYSDATE, 34, '');
+INSERT INTO NOTICE VALUES (35,'title35','cskim','내용35',SYSDATE, 35, '');
+INSERT INTO NOTICE VALUES (36,'title36','cskim','내용36',SYSDATE, 36, '');
+INSERT INTO NOTICE VALUES (37,'title37','cskim','내용37',SYSDATE, 37, '');
+INSERT INTO NOTICE VALUES (38,'title38','cskim','내용38',SYSDATE, 38, '');
+INSERT INTO NOTICE VALUES (39,'title39','cskim','내용39',SYSDATE, 39, '');
+INSERT INTO NOTICE VALUES (40,'title40','cskim','내용40',SYSDATE, 40, '');
+INSERT INTO NOTICE VALUES (41,'title41','cskim','내용41',SYSDATE, 41, '');
+INSERT INTO NOTICE VALUES (42,'title42','cskim','내용42',SYSDATE, 42, '');
+INSERT INTO NOTICE VALUES (43,'title43','cskim','내용43',SYSDATE, 43, '');
+INSERT INTO NOTICE VALUES (44,'title44','cskim','내용44',SYSDATE, 44, '');
+INSERT INTO NOTICE VALUES (45,'title45','cskim','내용45',SYSDATE, 45, '');
+INSERT INTO NOTICE VALUES (46,'title46','cskim','내용46',SYSDATE, 46, '');
+INSERT INTO NOTICE VALUES (47,'title47','cskim','내용47',SYSDATE, 47, '');
+INSERT INTO NOTICE VALUES (48,'title48','cskim','내용48',SYSDATE, 48, '');
+INSERT INTO NOTICE VALUES (49,'title49','cskim','내용49',SYSDATE, 49, '');
+INSERT INTO NOTICE VALUES (50,'title50','cskim','내용50',SYSDATE, 50, '');
+INSERT INTO NOTICE VALUES (51,'title51','cskim','내용51',SYSDATE, 51, '');
+INSERT INTO NOTICE VALUES (52,'title52','cskim','내용52',SYSDATE, 52, '');
+INSERT INTO NOTICE VALUES (53,'title53','cskim','내용53',SYSDATE, 53, '');
+INSERT INTO NOTICE VALUES (54,'title54','cskim','내용54',SYSDATE, 54, '');
+INSERT INTO NOTICE VALUES (55,'title55','cskim','내용55',SYSDATE, 55, '');
+
+
 
 -- prev
 SELECT * FROM NOTICE 
@@ -83,5 +129,14 @@ SELECT ID FROM (SELECT * FROM NOTICE ORDER BY REGDATE DESC)
 WHERE REGDATE < (SELECT REGDATE FROM NOTICE WHERE ID=3)
 AND ROWNUM=1
 
+
+
+
+-- VIEW 생성
+create view NOTICE_VIEW
+AS
+select N.ID, N.TITLE, N.WRITER_ID, N.REGDATE, N.HIT, N.FILES, COUNT(C.ID) CMT_COUNT from notice N
+LEFT JOIN "COMMENTS" C ON N.ID = C.NOTICE_ID
+GROUP BY N.ID, N.TITLE, N.WRITER_ID, N.REGDATE, N.HIT, N.FILES;
 
     
