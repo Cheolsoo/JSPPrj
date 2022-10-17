@@ -331,5 +331,58 @@ public class NoticeService {
 		return notice;
 	}
 
+	public int deleteNoticeAll(int[] ids) {
+		int result = 0;
+		String params = "";
+		
+		String sql = "DELETE NOTICE WHERE ID IN ("+params+")";
+
+		String url = "jdbc:oracle:thin:@localhost:1522/xe";				
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			Connection con = DriverManager.getConnection(url,"newlec","today");
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1,  id);
+
+			ResultSet rs = st.executeQuery();
+
+
+			if(rs.next()){
+				int nid = rs.getInt("ID");
+				String title = rs.getString("TITLE");
+				String writerId = rs.getString("WRITER_ID");
+				Date regdate = rs.getDate("REGDATE");
+				Integer hit = rs.getInt("HIT");
+				String files = rs.getString("FILES");
+				String content = rs.getString("CONTENT");	
+				
+				notice = new Notice(
+						nid
+						, title
+						, writerId
+						, regdate
+						, hit
+						, files
+						, content
+						);
+
+			}	
+
+			rs.close();
+			st.close();
+			con.close();     			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		
+		return result;
+	}
+
 }
 
