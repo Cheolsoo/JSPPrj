@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -333,7 +334,15 @@ public class NoticeService {
 
 	public int deleteNoticeAll(int[] ids) {
 		int result = 0;
+		
 		String params = "";
+		
+		for(int i=0; i<ids.length; i++) {
+			params += ids[i];
+			
+			if(i <= ids.length-1)
+				params += ",";
+		}
 		
 		String sql = "DELETE NOTICE WHERE ID IN ("+params+")";
 
@@ -343,34 +352,10 @@ public class NoticeService {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
 			Connection con = DriverManager.getConnection(url,"newlec","today");
-			PreparedStatement st = con.prepareStatement(sql);
-			st.setInt(1,  id);
+			Statement st = con.createStatement();
 
-			ResultSet rs = st.executeQuery();
+			result = st.executeUpdate(sql);	// insert, update, delete 사용할 때 executeUpdate() 사용합니다. 
 
-
-			if(rs.next()){
-				int nid = rs.getInt("ID");
-				String title = rs.getString("TITLE");
-				String writerId = rs.getString("WRITER_ID");
-				Date regdate = rs.getDate("REGDATE");
-				Integer hit = rs.getInt("HIT");
-				String files = rs.getString("FILES");
-				String content = rs.getString("CONTENT");	
-				
-				notice = new Notice(
-						nid
-						, title
-						, writerId
-						, regdate
-						, hit
-						, files
-						, content
-						);
-
-			}	
-
-			rs.close();
 			st.close();
 			con.close();     			
 		} catch (ClassNotFoundException e) {
