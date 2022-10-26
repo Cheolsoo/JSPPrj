@@ -36,9 +36,7 @@ public class RegController extends HttpServlet {
 		notice.setTitle(title);
 		notice.setContent(content);
 		notice.setPub(pub);
-		notice.setWriterId("newlec");
-		
-		
+		notice.setWriterId("newlec");		
 		
 		NoticeService service = new NoticeService();
 		int result = service.insertNotice(notice);
