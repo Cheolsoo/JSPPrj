@@ -19,9 +19,22 @@ public class NoticeService {
 		
 		return 0;		
 	}
-	
-	public int pubNoticeAll(int[] ids){
+
+	public int pubNoticeAll(int[] oids, int[] cids){
 		
+		return pubNoticeAll();
+	}
+	
+	public int pubNoticeAll(List<String> oids, List<String> cids){
+		
+		return pubNoticeAll();
+	}
+		
+	
+	// 20,30,43,56
+	public int pubNoticeAll(String oidsCSV, String cidsCSV){
+		
+		String sql1 = "UPDATE NOTICE SET PUB=1 WHERE ID IN (?);";
 		return 0;
 	}
 	

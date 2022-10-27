@@ -46,8 +46,8 @@ public class ListController extends HttpServlet {
 			System.out.println(oids);
 			System.out.println(cids);			
 
-			//service.pubNoticeList(opnIds);    // UPDATE NOTICE SET PUB=1 WHERE ID IN (...):
-			//service.closeNoticeList(clsIds);
+			// Transaction 처리
+			service.pubNoticeAll(oids, cids);    // UPDATE NOTICE SET PUB=1 WHERE ID IN (...):
 			
 			
 			
