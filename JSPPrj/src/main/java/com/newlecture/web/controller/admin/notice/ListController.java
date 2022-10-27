@@ -1,6 +1,7 @@
 package com.newlecture.web.controller.admin.notice;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ListController extends HttpServlet {
 		String[] delIds = request.getParameterValues("del-id");
 		String cmd = request.getParameter("cmd");
 		String ids_ = request.getParameter("ids");
-		String[] ids = ids_.split(" ");
+		String[] ids = ids_.trim().split(" ");
 		
 		NoticeService service = new NoticeService();
 		
@@ -35,17 +36,18 @@ public class ListController extends HttpServlet {
 				System.out.printf("open id : %s\n",  openId);
 			
 			List<String> oids = Arrays.asList(openIds);
+			// 1,2,3,4,5,6,7,8,9,10 - //3,5,8
+			// 1,2,4,6,7,9,10
 			
-			for(int i=0; i<ids.length; i++) {
-				// 1. 현재id가 open된 상태냐
-				if(oids.contains(ids[i]))
-					pub -> 1;
-				else
-					pub -> 0;
-			}
+			List<String> cids = new ArrayList(Arrays.asList(ids));
+			cids.removeAll(oids);
 			
-			service.pubNoticeList(opnIds);    // UPDATE NOTICE SET PUB=1 WHERE ID IN (...):
-			service.closeNoticeList(clsIds);
+			System.out.println(Arrays.asList(ids));
+			System.out.println(oids);
+			System.out.println(cids);			
+
+			//service.pubNoticeList(opnIds);    // UPDATE NOTICE SET PUB=1 WHERE ID IN (...):
+			//service.closeNoticeList(clsIds);
 			
 			
 			
