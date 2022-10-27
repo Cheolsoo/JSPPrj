@@ -29,7 +29,7 @@ public class NoticeService {
 		
 		int result = 0;
 		
-		String sql = "INSERT INTO NOTICE (TITLE, CONTENT, WRITER_ID, PUB) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO NOTICE (TITLE, CONTENT, WRITER_ID, PUB, FILES) VALUES (?,?,?,?,?)";
 
 		String url = "jdbc:oracle:thin:@localhost:1522/xe";				
 
@@ -43,6 +43,7 @@ public class NoticeService {
 			st.setString(2,  notice.getContent());
 			st.setString(3,  notice.getWriterId());
 			st.setBoolean(4,  notice.getPub());
+			st.setString(5,  notice.getFiles());
 
 			result = st.executeUpdate();	// insert, update, delete 사용할 때 executeUpdate() 사용합니다.			
 			//result = st.executeUpdate(sql);	// **주의사항** insert 문에서는 executeUpdate(sql) 로 사용하면 안됩니다. 
