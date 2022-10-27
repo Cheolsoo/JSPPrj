@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.newlecture.web.entity.Notice;
@@ -22,12 +23,25 @@ public class NoticeService {
 
 	public int pubNoticeAll(int[] oids, int[] cids){
 		
-		return pubNoticeAll();
+		List<String> oidsList = new ArrayList<>();
+		for(int i=0; i<oids.length; i++)
+			oidsList.add(String.valueOf(oids[i]));
+
+		List<String> cidsList = new ArrayList<>();		
+		for(int i=0; i<cids.length; i++)
+			oidsList.add(String.valueOf(cids[i]));
+		
+				
+		return pubNoticeAll(oidsList, cidsList);
 	}
 	
 	public int pubNoticeAll(List<String> oids, List<String> cids){
+
+		String oidsCSV = String.join(",", oids);
+		String cidsCSV = String.join(",", cids);
 		
-		return pubNoticeAll();
+		
+		return pubNoticeAll(oidsCSV, cidsCSV);
 	}
 		
 	
