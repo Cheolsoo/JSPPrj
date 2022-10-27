@@ -1,6 +1,7 @@
 package com.newlecture.web.controller.admin.notice;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,21 +24,41 @@ public class ListController extends HttpServlet {
 		String[] openIds = request.getParameterValues("open-id");
 		String[] delIds = request.getParameterValues("del-id");
 		String cmd = request.getParameter("cmd");
+		String ids_ = request.getParameter("ids");
+		String[] ids = ids_.split(" ");
+		
+		NoticeService service = new NoticeService();
 		
 		switch(cmd) {
 		case "일괄공개":
 			for(String openId : openIds)
 				System.out.printf("open id : %s\n",  openId);
+			
+			List<String> oids = Arrays.asList(openIds);
+			
+			for(int i=0; i<ids.length; i++) {
+				// 1. 현재id가 open된 상태냐
+				if(oids.contains(ids[i]))
+					pub -> 1;
+				else
+					pub -> 0;
+			}
+			
+			service.pubNoticeList(opnIds);    // UPDATE NOTICE SET PUB=1 WHERE ID IN (...):
+			service.closeNoticeList(clsIds);
+			
+			
+			
 			break;
 			
 		case "일괄삭제":
-			NoticeService service = new NoticeService();
 			
-			int[] ids = new int[delIds.length];
+			
+			int[] ids1 = new int[delIds.length];
 			for(int i=0; i<delIds.length; i++)
-				ids[i] = Integer.parseInt(delIds[i]);
+				ids1[i] = Integer.parseInt(delIds[i]);
 			
-			int result = service.deleteNoticeAll(ids);
+			int result = service.deleteNoticeAll(ids1);
 			break;		
 		}
 		
